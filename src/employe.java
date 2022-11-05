@@ -102,6 +102,36 @@ public class employe {
                     break;
                 case 3:
                     System.out.println("Search employe:--");
+                    System.out.println("Enter the Employee code:");
+                    empcode=sc.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/employeedb","root","");
+                        String sql = "SELECT `name`, `designation`, `salary`, `Compneyname`, `mobile`, `email`, `password` FROM `employe` WHERE  empcode="+String.valueOf(empcode);
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while(rs.next()){
+                            String getname = rs.getString(("name"));
+                            String getdesignation = rs.getString(("designation"));
+                            String getsalary = rs.getString(("salary"));
+                            String getCompneyname = rs.getString(("Compneyname"));
+                            String getmobile = rs.getString(("mobile"));
+                            String getemail = rs.getString(("email"));
+                            String getpassword = rs.getString(("password"));
+                            System.out.println("Name=" + getname);
+                            System.out.println("Designation=" + getdesignation);
+                            System.out.println("salary=" + getsalary);
+                            System.out.println("Compney name=" + getCompneyname);
+                            System.out.println("mobile=" + getmobile);
+                            System.out.println("email=" + getemail);
+                            System.out.println("password=" + getpassword);
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
+
+
                     break;
                 case 4:
                     System.out.println("Update Employe Details:--");
