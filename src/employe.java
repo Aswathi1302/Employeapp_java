@@ -138,6 +138,21 @@ public class employe {
                     break;
                 case 5:
                     System.out.println("Delete Employe  Details:--");
+                    System.out.println("Enter the Employee code:");
+                    empcode=sc.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/employeedb","root","");
+                        String sql ="DELETE FROM `employe` WHERE `empcode`="+String.valueOf(empcode);
+                        Statement stmt=con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("deleted successfully.....");
+
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
+
                     break;
                 case 6:
                     System.exit(0 );
