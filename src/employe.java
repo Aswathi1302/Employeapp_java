@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLOutput;
+import java.sql.*;
 import java.util.Scanner;
 public class employe {
     public static void main(String []args)
@@ -64,19 +61,44 @@ public class employe {
                         stmt.setString(8,password);
                         stmt.executeUpdate();
                         System.out.println("value inserted successfully.........!");
-
-
-
-
                     }
-
-
                     catch (Exception e){
                         System.out.println((e));
                     }
                     break;
                 case 2:
                     System.out.println("View Employe Details:--");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/employeedb","root","");
+                        String sql="SELECT `empcode`, `name`, `designation`, `salary`, `Compneyname`, `mobile`, `email`, `password` FROM `employe`";
+                        Statement stmt=con.createStatement();
+                        ResultSet rs=stmt.executeQuery(sql);
+
+                        while ((rs.next())) {
+                            String getempcode = rs.getString(("empcode"));
+                            String getname = rs.getString(("name"));
+                            String getdesignation = rs.getString(("designation"));
+                            String getsalary = rs.getString(("salary"));
+                            String getCompneyname = rs.getString(("Compneyname"));
+                            String getmobile = rs.getString(("mobile"));
+                            String getemail = rs.getString(("email"));
+                            String getpassword = rs.getString(("password"));
+                            System.out.println("Employe code=" + getempcode);
+                            System.out.println("Name=" + getname);
+                            System.out.println("Designation=" + getdesignation);
+                            System.out.println("salary=" + getsalary);
+                            System.out.println("Compney name=" + getCompneyname);
+                            System.out.println("mobile=" + getmobile);
+                            System.out.println("email=" + getemail);
+                            System.out.println("password=" + getpassword);
+                        }
+
+
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
                 case 3:
                     System.out.println("Search employe:--");
