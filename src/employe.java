@@ -108,8 +108,9 @@ public class employe {
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/employeedb","root","");
                         String sql = "SELECT `name`, `designation`, `salary`, `Compneyname`, `mobile`, `email`, `password` FROM `employe` WHERE  empcode="+String.valueOf(empcode);
-                        Statement stmt = con.createStatement();
-                        ResultSet rs = stmt.executeQuery(sql);
+                        Statement stmt=con.createStatement();
+                        ResultSet rs=stmt.executeQuery(sql);
+
                         while(rs.next()){
                             String getname = rs.getString(("name"));
                             String getdesignation = rs.getString(("designation"));
@@ -135,6 +136,34 @@ public class employe {
                     break;
                 case 4:
                     System.out.println("Update Employe Details:--");
+                    System.out.println("Enter the Employee code:");
+                    empcode=sc.nextInt();
+                    System.out.println("Enter the name of employee:--");
+                    name=sc.next();
+                    System.out.println("Enter the designation:--");
+                    designation=sc.next();
+                    System.out.println("Enter Salary:--");
+                    salary=sc.nextInt();
+                    System.out.println("Enter compney name:--");
+                    Compneyname=sc.next();
+                    System.out.println("Enter mobile number:--");
+                    mobile=sc.nextInt();
+                    System.out.println("Enter email:--");
+                    email=sc.next();
+                    System.out.println("Enter password");
+                    password=sc.next();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/employeedb","root","");
+                        String sql="UPDATE `employe` SET `name`='"+name+"',`designation`='"+designation+"',`salary`='"+String.valueOf(salary)+"',`Compneyname`='"+Compneyname+"',`mobile`='"+String.valueOf(mobile)+"',`email`='"+email+"',`password`='"+password+"' WHERE `empcode`="+String.valueOf(empcode);
+                        Statement stmt=con.createStatement();
+                        stmt.executeUpdate(sql);
+
+                        System.out.println("Data updated  successfully.....");
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
                 case 5:
                     System.out.println("Delete Employe  Details:--");
